@@ -1,0 +1,26 @@
+﻿@page "/blazor/perentComponent"
+
+<h3>ParentComponent</h3>
+<CascadingValue Value="@MessageForGrandChild">
+	<CascadingValue Value="@luckynumber">
+	<_ChildComponent OnButtonClick="ShowMessage"
+	Title="This title is passed as a parameter from petent component to child component">
+		some Text between the Tags from parent component
+	</_ChildComponent>
+</CascadingValue>
+</CascadingValue>
+<p>
+	@messageText
+</p>
+
+@code {
+	private string MessageForGrandChild = "This message is passed from parent Component to grand child";
+	private int luckynumber = 7;
+	public string messageText = "";
+
+	private void ShowMessage()
+	{
+		messageText = "Button inside child comopnent was clicked";
+	}
+
+}

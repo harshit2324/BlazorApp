@@ -1,0 +1,13 @@
+﻿@page "/learnblzor/routing"
+@page "/routing"
+@page "/routing/{param1}"
+
+<h3>Param1: @param1</h3>
+
+
+<h3>BlazorRouting</h3>
+
+@code {
+	[Parameter]
+	public string param1 { get; set; } = "";
+}
