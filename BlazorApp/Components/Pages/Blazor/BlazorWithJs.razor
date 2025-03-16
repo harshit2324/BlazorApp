@@ -20,8 +20,13 @@
 	}
 </div>
 <div>
-	<button class="btn btn-success" @onclick="ToastrSuccess">Toasr success</button>
-	<button class="btn btn-danger" @onclick="ToastrError">Toasr error</button>
+	<button class="btn btn-success m-2" @onclick="ToastrSuccess">Toasr success</button>
+	<button class="btn btn-danger m-2" @onclick="ToastrError">Toasr error</button>
+</div>
+
+<div>
+	<button class="btn btn-success m-2" @onclick="SweetalertSuccess">sweetalert success</button>
+	<button class="btn btn-danger m-2" @onclick="SweetalertError">sweetalert error</button>
 </div>
 
 @code {
@@ -34,12 +39,26 @@
 
 	private async Task ToastrSuccess()
 	{
-		await _jsruntime.InvokeVoidAsync("showToastr", "success", "Success Notification");
+		//await _jsruntime.InvokeVoidAsync("showToastr", "success", "Success Notification");
+		await _jsruntime.ToastrSuccess("Success Notification");
 	}
 
 
 	private async Task ToastrError()
 	{
-		await _jsruntime.InvokeVoidAsync("showToastr", "error", "Erorr Notification");
+		//await _jsruntime.InvokeVoidAsync("showToastr", "error", "Erorr Notification");
+		await _jsruntime.ToastrError("Erorr Notification");
+	}
+
+	private async Task SweetalertSuccess()
+	{
+		await _jsruntime.InvokeVoidAsync("ShowSwal", "success", "Task completed");
+		
+	}
+
+	private async Task SweetalertError()
+	{
+		await _jsruntime.InvokeVoidAsync("ShowSwal", "error", "Task Failed");
+		
 	}
 }

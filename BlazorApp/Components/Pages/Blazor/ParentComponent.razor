@@ -3,17 +3,22 @@
 <h3>ParentComponent</h3>
 <CascadingValue Value="@MessageForGrandChild">
 	<CascadingValue Value="@luckynumber">
-	<_ChildComponent OnButtonClick="ShowMessage"
-	Title="This title is passed as a parameter from petent component to child component">
-		some Text between the Tags from parent component
-	</_ChildComponent>
-</CascadingValue>
+		<_ChildComponent @ref="childComp" OnButtonClick="ShowMessage"
+		Title="This title is passed as a parameter from petent component to child component">
+			some Text between the Tags from parent component
+		</_ChildComponent>
+	</CascadingValue>
 </CascadingValue>
 <p>
 	@messageText
 </p>
 
+<div class="row">
+	<button class="btn btn-success" @onclick= "()=>childComp.ToastrSuccess()">show toaster</button>
+</div>
+
 @code {
+	private _ChildComponent childComp;
 	private string MessageForGrandChild = "This message is passed from parent Component to grand child";
 	private int luckynumber = 7;
 	public string messageText = "";
