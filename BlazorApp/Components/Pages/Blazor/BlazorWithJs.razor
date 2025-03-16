@@ -1,7 +1,45 @@
 ﻿@page "/blazorwithjs"
+@inject IJSRuntime _jsruntime
 
 <h3>BlazorWithJs</h3>
 
-@code {
+<div class="row">
+	<button class="btn btn-secondary" @onclick="TestConfirmBox">
+		Test Confirm Button
+	</button>
+</div>
 
+<div class="row">
+	@if (ConfirmResult) 
+	{
+		<p>Confirmation has been made!</p>
+	}
+	else
+	{
+		<p>pending Confirmation</p>
+	}
+</div>
+<div>
+	<button class="btn btn-success" @onclick="ToastrSuccess">Toasr success</button>
+	<button class="btn btn-danger" @onclick="ToastrError">Toasr error</button>
+</div>
+
+@code {
+	private string ConfirmMessage = "Are you sure you want to delete this record?";
+	private bool ConfirmResult { get; set; }
+	private async Task TestConfirmBox()
+	{
+		ConfirmResult= await _jsruntime.InvokeAsync<bool>("confirm", ConfirmMessage);
+	}
+
+	private async Task ToastrSuccess()
+	{
+		await _jsruntime.InvokeVoidAsync("showToastr", "success", "Success Notification");
+	}
+
+
+	private async Task ToastrError()
+	{
+		await _jsruntime.InvokeVoidAsync("showToastr", "error", "Erorr Notification");
+	}
 }
